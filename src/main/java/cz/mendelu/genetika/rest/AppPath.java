@@ -25,7 +25,7 @@ public class AppPath {
         LOG.info("Get app info");
 
         //TODO jde to nejak dostat z Gradle?
-        JsonObjectBuilder entity = Json.createObjectBuilder().add("version", "2.8.0");
+        JsonObjectBuilder entity = Json.createObjectBuilder().add("version", "2.8.1");
 
         return Response
                 .ok()
