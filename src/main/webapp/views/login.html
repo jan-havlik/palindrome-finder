@@ -1,0 +1,35 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_LOGIN'|translate}}</h1>
+
+	<p class="alert alert-danger" ng-repeat="error in loginForm.errors">
+		{{error}}
+	</p>
+
+	<p class="alert alert-warning" ng-show="user">
+		{{'ALREADY_LOGGED_IN'|translate}}
+	</p>
+
+	<form name="loginForm" novalidate ng-submit="doLogin(loginForm)" ng-hide="user">
+
+		<fieldset ng-disabled="loginForm.submitting">
+		
+			<label>{{'EMAIL'|translate}}:</label>
+			<input class="form-control" type="email" ng-model="email" required="required" />
+			<br />
+
+			<label>{{'PASSWORD'|translate}}:</label>
+			<input class="form-control" type="password" ng-model="pass" required="required" />
+			<br />
+
+			<div ng-messages="loginForm.$error" ng-show="loginForm.$dirty">
+				<p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+				<p class="alert alert-warning" ng-message="email">{{'ERR_EMAIL'|translate}}</p>
+			</div>
+
+			<input type="submit" ng-disabled="!loginForm.$valid" value="{{'LOGIN'|translate}}" class="btn btn-success" />
+
+		</fieldset>
+		
+	</form>
+</div>

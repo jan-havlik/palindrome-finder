@@ -1,0 +1,25 @@
+The DNA analyzer licence
+
+Copyright 2016 The DNA analyzer team (Jan Kolomaznik, Jiri Lysek, Vaclav Brazda)
+
+Contact: palindrome@ibp.cz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use, copy and
+to modify this Software without any limitation. You are not allowed to sell copies or
+modifications of this Software. If you want to establish your own publicly available
+(accessible from internet) web service or to publish a copy or modified copy of this
+Software you are required to ask for permission from original authors (the DNA analyser team).
+You are allowed to use a copy or modified copy of this Software inside of your institution
+or company for internal purposes. Following conditions must be accepted:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

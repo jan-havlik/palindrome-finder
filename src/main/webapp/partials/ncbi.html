@@ -1,0 +1,35 @@
+<div ng-controller="NCBICtrl">
+    <h2>{{'PAGE_NCBI'|translate}}</h2>
+
+    <p class="alert alert-success clearfix" ng-show="NCBIForm.success">
+        {{'NCBI_IMPORT_DONE'|translate}}
+    </p>
+
+    <p class="alert alert-danger" ng-repeat="error in NCBIForm.errors">
+        {{error}}
+    </p>
+
+    <p class="alert alert-warning" ng-show="uploadForm.submitting">
+        {{'PROCESSING'|translate}}
+        <span class="processing"></span>
+    </p>
+
+    <form novalidate name="NCBIForm" ng-submit="NCBILoad(NCBIForm)">
+
+        <fieldset ng-disabled="NCBIForm.submitting">
+
+            <label>ID:</label>
+            <input class="form-control" type="text" ng-model="id" required />
+            <br />
+
+            <div ng-messages="NCBIForm.$error" ng-show="NCBIForm.$dirty">
+                <p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+            </div>
+
+            <input type="submit" ng-disabled="!NCBIForm.$valid" class="btn btn-success" value="{{'NCBI_IMPORT'|translate}}" />
+
+        </fieldset>
+
+    </form>
+
+</div>

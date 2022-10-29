@@ -1,0 +1,48 @@
+<div ng-controller="UploadCtrl">
+    <h2>{{'PAGE_UPLOAD'|translate}}</h2>
+
+    <p class="alert alert-success" ng-show="uploadForm.success">
+        {{'UPLOAD_FILE_ADDED'|translate}}
+    </p>
+
+    <p class="alert alert-danger" ng-repeat="error in uploadForm.errors">
+        {{error}}
+    </p>
+
+    <p class="alert alert-warning" ng-show="uploadForm.submitting">
+        {{'UPLOAD_UPLOADING_FILE'|translate}}
+        <span class="processing"></span>
+    </p>
+
+    <form name="uploadForm" novalidate ng-submit="upload(uploadForm)">
+
+        <fieldset ng-disabled="uploadForm.submitting">
+
+            <label>{{'TITLE'|translate}}:</label>
+            <input class="form-control" type="text" ng-model="name" required />
+            <br />
+
+            <label>{{'FORMAT'|translate}}:</label>
+            <select class="form-control" ng-model="format" required>
+                <option value="plain">Plain</option>
+                <option value="fasta">Fasta</option>
+            </select>
+            <br />
+
+            <label>{{'FILE'|translate}}:</label>
+            <div class="form-control">
+                <input type="file" name="file" required />
+            </div>
+            <br />
+
+            <div ng-messages="uploadForm.$error" ng-show="uploadForm.$dirty">
+                <p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+                <p class="alert alert-warning" ng-show="uiFileError">{{'ERR_SELECT_FILE'|translate}}</p>
+            </div>
+
+            <input type="submit" ng-disabled="!uploadForm.$valid" class="btn btn-success" value="{{'UPLOAD'|translate}}" />
+
+        </fieldset>
+
+    </form>
+</div>

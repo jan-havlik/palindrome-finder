@@ -1,0 +1,153 @@
+<div class="container app-content" role="main">
+
+    <h1>
+        {{'PAGE_PREDICTOR'|translate}}
+        <a class="pull-right" href="{{buildLink('help-p53-predictor')}}">
+            <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+    </h1>
+
+    <uib-tabset>
+
+        <uib-tab heading="{{'PREDICTOR_SINGLE'|translate}}">
+            <div ng-controller="P53PredictorSingleCtrl">
+
+                <form ng-submit="calcPredictor(chromosome)" name="singleForm">
+
+                    <label>{{'SEQUENCE'|translate}}:</label>
+                    <input class="form-control" type="text" ng-model="chromosome" ng-change="calcPredictor(chromosome)" required maxlength="20"/>
+                    <br/>
+
+                    <label>{{'LENGTH'|translate}}:</label>
+                    {{length}} (= 20)
+                    <br/>
+
+                    <input type="submit" class="btn btn-success" value="{{'CALCULATE'|translate}}" ng-disabled="!singleForm.$valid"/>
+
+                </form>
+
+                <br/>
+
+                <p class="alert alert-danger" ng-show="error">{{error}}</p>
+
+                <p class="alert alert-success" ng-show="!error && predictor">
+                    log <em>K</em><sub>d</sub>(x) = log <em>K</em><sub>d</sub>(ref) + &Sigma; &Delta; log <em>K</em><sub>d</sub>(i,N) = -7.61 +
+                    {{difference|number:2}} = {{predictor|number:2}}
+                    <br/>
+                    &Sigma; &Delta; log <em>K</em><sub>d</sub>(i,N) = {{difference|number:2}}
+                    <br/>
+                    Relative affinity: {{relativeAffinity * 100|number:0}}%
+                </p>
+
+            </div>
+        </uib-tab>
+
+        <uib-tab heading="{{'PREDICTOR_MULTIPLE'|translate}}">
+            <div ng-controller="P53PredictorMultiCtrl">
+
+                <form ng-submit="calcPredictors(sequences)" name="multipleForm">
+                    <label>{{'SEQUENCES'|translate}}:</label>
+                    <textarea class="form-control" ng-model="sequences" cols="80" rows="6" placeholder="{{'PREDICTOR_MULTIPLE_INPUT'|translate}}"
+                              required></textarea>
+                    <br/>
+
+                    <input type="submit" class="btn btn-success" value="{{'CALCULATE'|translate}}" ng-disabled="!multipleForm.$valid"/>
+                </form>
+
+                <br/>
+
+                <table class="table table-striped" ng-show="results.length > 0">
+                    <tr>
+                        <th>
+                            <span data-order-direction="uiOrderMultiple" data-column="index"></span>
+                            <a ng-click="toggleOrder('index', 'uiOrderMultiple')">{{'ROW'|translate}}</a>
+                        </th>
+                        <th>{{'SEQUENCE'|translate}}</th>
+                        <th class="text-right">
+                            <span data-order-direction="uiOrderMultiple" data-column="predictor"></span>
+                            <a ng-click="toggleOrder('predictor', 'uiOrderMultiple')">log <em>K</em><sub>d</sub>(x)</a>
+                        </th>
+                        <th class="text-right">
+                            <span data-order-direction="uiOrderMultiple" data-column="difference"></span>
+                            <a ng-click="toggleOrder('difference', 'uiOrderMultiple')">&Delta; log <em>K</em><sub>d</sub>(x)</a>
+                        </th>
+                        <th class="text-right">
+                            <span data-order-direction="uiOrderMultiple" data-column="relativeAffinity"></span>
+                            <a ng-click="toggleOrder('relativeAffinity', 'uiOrderMultiple')">Relative affinity</a>
+                        </th>
+                    </tr>
+                    <tr ng-repeat="result in results | orderBy: uiOrderMultiple">
+                        <td>{{result. index}}</td>
+                        <td class="sequence">{{result.sequence}}</td>
+                        <td class="text-right">
+                            <span ng-show="result.error">{{result.error}}</span>
+                            <span ng-show="!result.error">
+                                {{result.predictor|number:2}}
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <span ng-show="!result.error">
+                                {{result.difference|number:2}}
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <span ng-show="!result.error">
+                                {{result.relativeAffinity * 100|number:0}}%
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </uib-tab>
+
+        <uib-tab heading="{{'PREDICTOR_FIND_BEST'|translate}}">
+            <div ng-controller="P53PredictorFindCtrl">
+
+                <form ng-submit="findBest(sequence, amount)" name="bestSearchForm">
+                    <label>{{'SEQUENCE'|translate}}:</label>
+                    <textarea class="form-control" ng-model="sequence" cols="80" rows="6" placeholder="{{'PREDICTOR_FIND_INPUT'|translate}}"
+                              required></textarea>
+                    <br/>
+
+                    <label>{{'PREDICTOR_AMOUNT'|translate}}:</label>
+                    <input class="form-control" type="number" ng-model="amount" required min="1"/>
+                    <br/>
+
+                    <input type="submit" class="btn btn-success" value="{{'CALCULATE'|translate}}" ng-disabled="!bestSearchForm.$valid"/>
+                </form>
+
+                <br/>
+
+                <p class="alert alert-danger" ng-show="error">{{error}}</p>
+
+                <table class="table table-striped" ng-show="results.length > 0">
+                    <tr>
+                        <th>{{'SEQUENCE'|translate}}</th>
+                        <th class="text-center">{{'POSITION'|translate}}</th>
+                        <th class="text-center">log <em>K</em><sub>d</sub>(x)</th>
+                        <th class="text-center">&Delta; log <em>K</em><sub>d</sub>(x)</th>
+                        <th class="text-center">Relative affinity</th>
+                    </tr>
+                    <tr ng-repeat="result in results">
+                        <td class="sequence">{{result.sequence}}</td>
+                        <td class="text-right">{{result.position + 1}}</td>
+                        <td class="text-right">{{result.predictor|number:2}}</td>
+                        <td class="text-right">{{result.difference|number:2}}</td>
+                        <td class="text-right">{{result.difference * 100|number:0}}</td>
+                    </tr>
+                </table>
+
+            </div>
+        </uib-tab>
+
+    </uib-tabset>
+
+    <p>
+        Ideal binding sequence for p53: GGACATGCCCGGGCATGTCC, log <em>K</em><sub>d</sub>(x) = - 7.61
+        <br/>
+        Veprintsev, D.B. and A.R. Fersht, <em>Algorithm for prediction of tumour suppressor p53 affinity for binding sites in DNA</em>. Nucleic acids research,
+        2008. <strong>36</strong>(5): p. 1589-98.
+    </p>
+
+</div>

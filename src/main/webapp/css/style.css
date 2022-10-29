@@ -1,0 +1,248 @@
+.heat-map {
+  display: flex;
+  background-color: #5e5e5e;
+}
+.heat-map .heat-map-segment-first {
+  width: 1rem;
+  text-align: center;
+}
+.heat-map .heat-map-segment {
+  display: inline-block;
+  flex-grow: 1;
+  padding: 0.2rem 0 0.2rem 0rem;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  font-size: 0.6rem;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.heat-map .heat-map-segment.highlight {
+  border-top: 2px solid #ffff00;
+  border-bottom: 2px solid #ffff00;
+  border-left: 1px solid #ffff00;
+  border-right: 1px solid #ffff00;
+}
+.heat-map .heat-map-segment.active {
+  border-top: 2px solid #00FF00;
+  border-bottom: 2px solid #00FF00;
+  border-left: 1px solid #00FF00;
+  border-right: 1px solid #00FF00;
+}
+.chromosome-browser {
+  position: relative;
+  height: 4rem;
+  width: 100%;
+}
+.chromosome-browser .btn {
+  position: absolute;
+  height: 3rem;
+  line-height: 2.7rem;
+  padding: 0;
+  width: 2rem;
+  text-align: center;
+  background: #888888;
+  border-radius: 0.2rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+.chromosome-browser .btn.btn-left {
+  left: 0;
+}
+.chromosome-browser .btn.btn-right {
+  right: 0;
+}
+.chromosome-browser .chromosome-container {
+  position: absolute;
+  margin: 0;
+  height: 3rem;
+  left: 2rem;
+  right: 2rem;
+  background: #EEEEEE;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.chromosome-browser .chromosome-container .chromosome {
+  display: inline-block;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.chromosome-browser .chromosome-container .chromosome .gene {
+  display: inline-block;
+  position: relative;
+  height: 2rem;
+  line-height: 1rem;
+  font-size: 0.8rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  left: 0;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-0 {
+  top: 1rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-0.sequence {
+  border-color: #FF0000;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-0.opposite {
+  border-color: #BB0000;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-1 {
+  top: 1.2rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-1.sequence {
+  border-color: #00FF00;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-1.opposite {
+  border-color: #00BB00;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-2 {
+  top: 1.4rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-2.sequence {
+  border-color: #0000FF;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-2.opposite {
+  border-color: #0000BB;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-3 {
+  top: 1.6rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-3.sequence {
+  border-color: #00FFFF;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-3.opposite {
+  border-color: #00BBBB;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-4 {
+  top: 1.8rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-4.sequence {
+  border-color: #FF00FF;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-4.opposite {
+  border-color: #BB00BB;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-5 {
+  top: 2rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-5.sequence {
+  border-color: #FFFF00;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.layer-5.opposite {
+  border-color: #BBBB00;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.spacer,
+.chromosome-browser .chromosome-container .chromosome .gene .layer.sequence,
+.chromosome-browser .chromosome-container .chromosome .gene .layer.opposite {
+  border-width: 0.1rem;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.spacer {
+  border-style: solid;
+  border-color: #BBBBBB;
+}
+.chromosome-browser .chromosome-container .chromosome .gene .layer.sequence,
+.chromosome-browser .chromosome-container .chromosome .gene .layer.opposite {
+  border-style: solid;
+}
+.chromosome-browser .navigation {
+  position: absolute;
+  top: 3rem;
+  height: 1rem;
+  left: 2rem;
+  right: 2rem;
+  margin: 0;
+  padding: 0;
+  background: #CCCCCC;
+  border-radius: 0.2rem;
+}
+.chromosome-browser .navigation .mover {
+  display: block;
+  position: absolute;
+  width: 2rem;
+  height: 1rem;
+  background: #888888;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 12pt;
+}
+body {
+  background-color: #FFFFFF;
+}
+a {
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: none;
+}
+.app-content {
+  margin-top: 50px;
+}
+.highlight {
+  background-color: #F8F58C;
+}
+.sequence {
+  font-family: "Consolas", "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+.sequence .palindrome-sequence {
+  color: #FF0000;
+}
+.sequence .palindrome-opposite {
+  color: #0000FF;
+}
+.sequence .palindrome-spacer {
+  color: #000000;
+}
+.graph-bar-container {
+  position: relative;
+}
+.graph-bar-container .graph-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 2px;
+  border: 1px solid red;
+  opacity: 0.2;
+}
+.graph-bar-container .graph-bar.graph-bar-red {
+  background-color: #FF0000;
+}
+.graph-bar-container .graph-bar.graph-bar-green {
+  background-color: #00FF00;
+}
+.graph-bar-container .graph-bar.graph-bar-blue {
+  background-color: #0000FF;
+}
+.heat-map,
+.chromosome-browser {
+  margin-bottom: 1rem;
+}
+.processing {
+  background-image: url('../images/loader.gif');
+  background-repeat: no-repeat;
+  background-position: right;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+input.ng-valid[required],
+select.ng-valid[required],
+textarea.ng-valid[required] {
+  border-left: 5px solid #42A948;
+  /* green */
+}
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
+  border-left: 5px solid #a94442;
+  /* red */
+}

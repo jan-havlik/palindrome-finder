@@ -1,0 +1,19 @@
+<div class="chromosome-browser">
+    <div>
+        <span class="btn btn-left" ng-click="prevStep()">&laquo;</span>
+        <div class="chromosome-container">
+            <div class="chromosome sequence">
+                <span ng-repeat="gene in chromosomePart track by $index" class="gene" ng-class="gene.className">
+                    {{gene.letter}}
+                    <span class="layer" ng-class="['layer-' + k, layer]" ng-repeat="(k, layer) in gene.layers track by $index"></span>
+                </span>
+            </div>
+        </div>
+        <span class="btn btn-right" ng-click="nextStep()">&raquo;</span>
+    </div>
+    <div data-horizontal-scroll="{{scrollChromosomeLength}}" data-init-pos="{{pos}}" data-on-pos-change="updatePos(pos)">
+        <div class="navigation">
+            <span class="mover"></span>
+        </div>
+    </div>
+</div>

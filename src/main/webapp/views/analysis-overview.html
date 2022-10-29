@@ -1,0 +1,81 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_ANALYSIS_OVERVIEW'|translate}}</h1>
+
+    <div ng-show="analyses.length > 0">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <span data-order-direction="uiOrderResults" data-column="name"></span>
+                    <a ng-click="toggleOrder('name', 'uiOrderResults')">{{'TITLE'|translate}}</a>
+                </th>
+                <th class="text-center">{{'SETTINGS'|translate}}</th>
+                <th class="text-center">{{'PALINDROME_CYCLYC'|translate}}</th>
+                <th class="text-center">{{'PALINDROME_COUNT'|translate}}</th>
+                <th class="text-center">
+                    <span data-order-direction="uiOrderResults" data-column="date"></span>
+                    <a ng-click="toggleOrder('date', 'uiOrderResults')">{{'DATE'|translate}}</a>
+                </th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr ng-repeat="an in analyses | orderBy: uiOrderResults">
+                <td>
+                    <label>
+                        <input type="checkbox" ng-model="an.selected" />
+                        {{an.name|scut:50}}
+                    </label>
+                    <br />
+                    <small>({{an.length}} {{'BASE_PAIRS'|translate}})</small>
+                </td>
+                <td class="text-center">
+                    {{'SIZE'|translate}}:&nbsp;{{an.size}}
+                    <br />
+                    {{'SPACER'|translate}}:&nbsp;{{an.spacer}}
+                    <br />
+                    {{'PALINDROME_MISMATCHES'|translate}}:&nbsp;{{an.mismatches}}
+                </td>
+                <td class="text-center">
+                    <span class="glyphicon" ng-class="{'glyphicon-ok': an.cycle, 'glyphicon-remove': !an.cycle}"></span>
+                </td>
+                <td class="text-right">{{an.count}}</td>
+                <td class="text-right">{{an.date|localeDateTime}}</td>
+                <td>
+                    <a class="btn btn-default" ng-href="{{buildLink('palindrome-results', an.id)}}">
+                        <span class="glyphicon glyphicon-search"></span> {{'SHOW_DETAILS'|translate}}
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-default" ng-href="/rest/export/csv/analysis/palindrome/{{an.id}}">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> {{'EXPORT_CSV'|translate}}
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-default" ng-href="/rest/export/csv/analysis/palindrome/{{an.id}}/header">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> {{'EXPORT_CSV_HEADER'|translate}}
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="clearfix">
+            <button class="btn btn-default" ng-click="toggleSelection()">
+                <span class="glyphicon glyphicon-refresh"></span> {{'TOGGLE_SEL'|translate}}
+            </button>
+
+            <button class="btn btn-danger pull-right" ng-click="deleteAnalysisConfirm()">
+                <span class="glyphicon glyphicon-remove"></span> {{'DELETE'|translate}}
+            </button>
+        </div>
+    </div>
+
+    <div ng-show="analyses.length == 0">
+        {{'NOTHING_HERE'|translate}} {{'ANALYSIS_OVERVIEW_MAKE'|translate}}
+    </div>
+
+    <div data-modal-confirm="confirmDeletion" data-on-confirm="deleteAnalyses()" data-message="{{'CONFIRM_DELETE_SEL'|translate}}" data-title="{{'CONFIRM'|translate}}"></div>
+
+    <!-- TODO tady by mohl byt formular pro nastaveni davkove analyzy pro zaskrtnute genomy -->
+
+</div>

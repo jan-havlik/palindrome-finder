@@ -1,0 +1,114 @@
+.chromosome-browser {
+  position: relative;
+  height: 4rem;
+  width: 100%;
+  * {
+    //border: 1px solid red;
+  }
+
+  .btn {
+    position: absolute;
+    height: 3rem;
+    line-height: 2.7rem;
+    padding: 0;
+    width: 2rem;
+    text-align: center;
+    background: #888888;
+    border-radius: 0.2rem;
+    color: #ffffff;
+    cursor: pointer;
+    &.btn-left {
+      left: 0;
+    }
+    &.btn-right {
+      right: 0;
+    }
+  }
+  .chromosome-container {
+    position: absolute;
+    margin: 0;
+    height: 3rem;
+    left: 2rem;
+    right: 2rem;
+    background: #EEEEEE;
+    padding: 0.5rem;
+    overflow: hidden;
+    .chromosome {
+      display: inline-block;
+      padding: 0;
+      background: none;
+      border: none;
+      .gene {
+        display: inline-block;
+        position: relative;
+        height: 2rem;
+        line-height: 1rem;
+        font-size: 0.8rem;
+        .layer {
+          position: absolute;
+          width: 100%;
+          height: 0;
+          left: 0;
+
+          &.layer-0 { top: 1rem; }
+          &.layer-0.sequence { border-color: #FF0000; }
+          &.layer-0.opposite { border-color: #BB0000; }
+
+          &.layer-1 { top: 1.2rem; }
+          &.layer-1.sequence { border-color: #00FF00; }
+          &.layer-1.opposite { border-color: #00BB00; }
+
+          &.layer-2 { top: 1.4rem; }
+          &.layer-2.sequence { border-color: #0000FF; }
+          &.layer-2.opposite { border-color: #0000BB; }
+
+          &.layer-3 { top: 1.6rem; }
+          &.layer-3.sequence { border-color: #00FFFF; }
+          &.layer-3.opposite { border-color: #00BBBB; }
+
+          &.layer-4 { top: 1.8rem; }
+          &.layer-4.sequence { border-color: #FF00FF; }
+          &.layer-4.opposite { border-color: #BB00BB; }
+
+          &.layer-5 { top: 2rem; }
+          &.layer-5.sequence { border-color: #FFFF00; }
+          &.layer-5.opposite { border-color: #BBBB00; }
+
+          &.spacer, &.sequence, &.opposite {
+            border-width: 0.1rem;
+          }
+          &.spacer {
+            border-style: solid;
+            border-color: #BBBBBB;
+          }
+          &.sequence, &.opposite {
+            border-style: solid;
+          }
+        }
+      }
+    }
+  }
+  .navigation {
+    position: absolute;
+    top: 3rem;
+    height: 1rem;
+    left: 2rem;
+    right: 2rem;
+    margin: 0;
+    padding: 0;
+    background: #CCCCCC;
+    border-radius: 0.2rem;
+    .mover {
+      display: block;
+      position: absolute;
+      width: 2rem;
+      height: 1rem;
+      background: #888888;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+}

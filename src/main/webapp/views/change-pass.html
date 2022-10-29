@@ -1,0 +1,45 @@
+<div class="container app-content" role="main">
+
+    <div class="col-md-6">
+
+        <h1>{{'CHANGE_PASS'|translate}}</h1>
+
+        <p class="alert alert-success clearfix" ng-show="changePassForm.success">
+            {{'CHANGE_PASS_DONE'|translate}}
+        </p>
+
+        <p class="alert alert-danger" ng-repeat="error in changePassForm.errors">
+            {{error}}
+        </p>
+
+        <form name="changePassForm" novalidate ng-submit="changePass(changePassForm)">
+
+            <fieldset ng-disabled="changePassForm.submitting">
+
+                <label>{{'CHANGE_PASS_OLD'|translate}}:</label>
+                <input class="form-control" type="password" ng-model="passwordOld" required />
+                <br />
+
+                <label>{{'CHANGE_PASS_NEW'|translate}}:</label>
+                <input class="form-control" type="password" ng-model="password1" required ng-minlength="5" />
+                <br />
+
+                <label>{{'CHANGE_PASS_REPEAT'|translate}}:</label>
+                <input class="form-control" type="password" ng-model="password2" data-same-as="password1" required ng-minlength="5" />
+                <br />
+
+                <div ng-messages="changePassForm.$error" ng-show="changePassForm.$dirty">
+                    <p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+                    <p class="alert alert-warning" ng-message="minlength">{{'ERR_PASSWORD'|translate}}</p>
+                    <p class="alert alert-warning" ng-message="sameas">{{'ERR_PASS_MATCH'|translate}}</p>
+                </div>
+
+                <input type="submit" ng-disabled="!changePassForm.$valid" value="{{'CHANGE_PASS'|translate}}" class="btn btn-success" />
+
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>

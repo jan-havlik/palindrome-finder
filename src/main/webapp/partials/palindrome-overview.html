@@ -1,0 +1,114 @@
+<h2>{{'PALINDROME_OVERVIEW'|translate}}</h2>
+
+<div ng-show="palindromes">
+    <div class="row">
+        <div class="col-md-12 form-inline">
+            <!-- filtrace -->
+            <fieldset>
+                <legend>{{'FILTER'|translate}}</legend>
+                <label>{{'LENGTH'|translate}}:</label>
+                <select class="form-control" ng-model="filter.size">
+                    <option value="">{{'PALINDROME_ALL_SIZES'|translate}}</option>
+                    <option ng-repeat="(k, v) in stats.sizeCount" value="{{k}}">{{k}} ({{v}}&times;)</option>
+                </select>
+                <label>{{'SPACER'|translate}}:</label>
+                <select class="form-control" ng-model="filter.spacer">
+                    <option value="">{{'PALINDROME_ALL_SIZES'|translate}}</option>
+                    <option ng-repeat="(k, v) in stats.spacerCount" value="{{k}}">{{k}} ({{v}}&times;)</option>
+                </select>
+                <label>{{'PALINDROME_MISMATCHES'|translate}}:</label>
+                <select class="form-control" ng-model="filter.mismatch">
+                    <option value="">{{'PALINDROME_ALL_SIZES'|translate}}</option>
+                    <option ng-repeat="(k, v) in stats.mismatchCount" value="{{k}}">{{k}} ({{v}}&times;)</option>
+                </select>
+                <label>{{'PALINDROME_SEQUENCE_FILTER'|translate}}:</label>
+                <input class="form-control" type="text" ng-model="filter.sequence" />
+
+                <button class="btn btn-default" ng-click="cancelFilter()" ng-hide="isFilterEmpty()">
+                    <span class="glyphicon glyphicon-remove"></span> {{'CANCEL_FILTER'|translate}}
+                </button>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<br/>
+<table class="table table-striped">
+    <tr>
+        <th>
+            <span data-order-direction="uiOrderOverview[0]" data-column="sequence.length"></span>
+            <a ng-click="toggleOrder(['sequence.length', 'stability_NNModel.delta'], 'uiOrderOverview')">{{'LENGTH'|translate}}</a> -
+            <span data-order-direction="uiOrderOverview[0]" data-column="spacer.length"></span>
+            <a ng-click="toggleOrder(['spacer.length', 'stability_NNModel.delta'], 'uiOrderOverview')">{{'SPACER'|translate}}</a> -
+            <span data-order-direction="uiOrderOverview[0]" data-column="mismatches"></span>
+            <a ng-click="toggleOrder(['mismatches', 'stability_NNModel.delta'], 'uiOrderOverview')">{{'PALINDROME_MISMATCHES'|translate}}</a>
+        </th>
+        <th>
+            <span data-order-direction="uiOrderOverview" data-column="position"></span>
+            <a ng-click="toggleOrder('position', 'uiOrderOverview')">{{'PALINDROME_POSITION'|translate}}</a>
+        </th>
+        <th>
+            <span data-order-direction="uiOrderOverview" data-column="stability_NNModel.delta"></span>
+            <a ng-click="toggleOrder('stability_NNModel.delta', 'uiOrderOverview')">{{'PALINDROME_ENERGY'|translate}}</a>
+        </th>
+        <th>{{'PALINDROME'|translate}}</th>
+        <th>{{'DETAILS'|translate}}</th>
+    </tr>
+    <tr class="palindrome" ng-repeat-start="palindrome in palindromes | orderBy: uiOrderOverview"
+        ng-show="decideFilter(filter, palindrome)">
+        <td>
+            {{palindrome.signature}}
+        </td>
+        <td>
+            <a ng-click="highlightPalindromes([palindrome.position])">
+                <span class="glyphicon glyphicon-search"></span>
+                {{palindrome.position + 1}}
+            </a>
+        </td>
+        <td class="stability">
+            {{palindrome.stability_NNModel.delta|number:2}}
+        </td>
+        <td class="sequence">
+            <a ng-click="filterSequence(palindrome.sequence)">
+                <span class="glyphicon glyphicon-filter" title="{{'PALINDROME_FILTER'|translate}}"></span>
+            </a>
+            <span class="palindrome-sequence">{{palindrome.sequence}}</span>
+            <span class="palindrome-spacer">{{palindrome.spacer}}</span>
+            <span class="palindrome-opposite">{{palindrome.opposite}}</span>
+        </td>
+        <td>
+            <button class="btn btn-default" ng-click="toggleDetails(palindrome)">
+                <span class="glyphicon glyphicon-equalizer"></span>
+                <span ng-hide="palindrome.showDetails">{{'SHOW_DETAILS'|translate}}</span>
+                <span ng-show="palindrome.showDetails">{{'HIDE_DETAILS'|translate}}</span>
+            </button>
+        </td>
+    </tr>
+    <tr ng-repeat-end ng-show="decideFilter(filter, palindrome) && palindrome.showDetails">
+        <td colspan="5">
+            <div class="row">
+                <div class="col-md-8">
+                    <pre class="well sequence">{{palindrome.visual}}</pre>
+                </div>
+                <div class="col-md-4">
+                    <h3>{{palindrome.signature}}</h3>
+                    {{'PALINDROME_SEQUENCE'|translate}}: {{palindrome.sequence}}
+                    <br/>
+                    <span ng-show="palindrome.spacer">Spacer: {{palindrome.spacer}}</span>
+                    <br/>
+                    {{'PALINDROME_OPPOSITE'|translate}}: {{palindrome.opposite}}
+                    <br/>
+                    {{'PALINDROME_POSITION'|translate}}: {{palindrome.position + 1}}
+                    <br/>
+                    {{'PALINDROME_MISMATCHES'|translate}}: {{palindrome.mismatches}}
+                    <br/>
+                    {{'PALINDROME_ENERGY'|translate}}: {{palindrome.stability_NNModel.delta|number:2}}
+                    <br/>
+                    {{'PALINDROME_ENERGY_LINEAR'|translate}}: {{palindrome.stability_NNModel.linear|number:2}}
+                    <br/>
+                    {{'PALINDROME_ENERGY_CRUCIFORM'|translate}}: {{palindrome.stability_NNModel.cruciform|number:2}}
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

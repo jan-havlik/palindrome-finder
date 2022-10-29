@@ -1,0 +1,39 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_PREDICTOR'|translate}}</h1>
+
+    <p>
+        This tools implements calculations of p53 binding predictor for 20 base pairs sequences.
+    </p>
+
+    <h2>{{'PREDICTOR_SINGLE'|translate}}</h2>
+
+    <p>
+        This tab calculates individual predictor for a single sequence.
+    </p>
+
+    <h2>{{'PREDICTOR_MULTIPLE'|translate}}</h2>
+
+    <p>
+        This tab provides calculation of multiple predictors for various sequences. Input is a multiline text where each
+        line is a 20 bp sequence.
+    </p>
+
+    <h2>{{'PREDICTOR_FIND_BEST'|translate}}</h2>
+
+    <p>
+        In this mode a calculation is performed for every 20 bp sub-sequence of a long sequence. The sub-sequences are extracted
+        by moving a 20 bp window along the input sequence one character at a time. Selected amount of best sequences is presented.
+    </p>
+
+    <p>
+        Implemented method of predictor calculation is explained in following article:
+        <br />
+        Veprintsev, D.B. and A.R. Fersht, <em>Algorithm for prediction of tumour suppressor p53 affinity for binding sites in DNA</em>. Nucleic acids research, 2008. <strong>36</strong>(5): p. 1589-98.
+    </p>
+
+    <a ng-href="{{buildLink('p53-predictor')}}">
+        <span class="glyphicon glyphicon-arrow-left"></span> {{'PAGE_PREDICTOR'|translate}}
+    </a>
+
+</div>

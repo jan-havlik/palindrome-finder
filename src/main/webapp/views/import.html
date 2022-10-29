@@ -1,0 +1,30 @@
+<div class="container app-content" role="main">
+
+    <h1>
+        {{'PAGE_IMPORT'|translate}}
+        <a class="pull-right" href="{{buildLink('help-import-upload')}}">
+            <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+    </h1>
+
+    <p>
+        {{'IMPORT_INFO'|translate}}
+    </p>
+
+    <uib-tabset>
+
+        <uib-tab heading="{{'PAGE_UPLOAD'|translate}}">
+            <div ng-include="'partials/upload.html'"></div>
+        </uib-tab>
+
+        <uib-tab heading="{{'PAGE_NCBI'|translate}}">
+            <div ng-include="'partials/ncbi.html'"></div>
+        </uib-tab>
+
+        <uib-tab heading="{{'PAGE_TEXT_IMPORT'|translate}}">
+            <div ng-include="'partials/text-import.html'"></div>
+        </uib-tab>
+
+    </uib-tabset>
+
+</div>

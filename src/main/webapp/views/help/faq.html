@@ -1,0 +1,54 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_FAQ'|translate}}</h1>
+
+    <h2>What advantages does this software have?</h2>
+    <ul>
+        <li>We support analysis of long sequences (there is no actual limit, but longer sequences take long time - be patient).</li>
+        <li>You can search for inverted repeats using 4 parameters (length of repeat, spacer length, amount of mismatches and cicularity).</li>
+        <li>We allow you to store results of your analysis for comparison with others. This feature requires user account.</li>
+        <li>We support export of found sequences and summary of stored results in CSV format.</li>
+        <li>Direct NCBI import using sequence ID.</li>
+    </ul>
+
+    <h2>What limitations does this software have?</h2>
+    <ul>
+        <li>
+            Only 5000 inverted repeats can be displayed at once. It is due to the high computational complexity of filtration and display logic.
+            If you encounter this limitation, we advise you to change parameters of inverted repeat search.
+        </li>
+        <li>
+            There are currently no other limitations, use this software wisely to preserve this policy for other users. Thank you.
+        </li>
+    </ul>
+
+    <!-- TODO
+    <h2>How is &Delta;G calculated?</h2>
+    <p>
+
+    </p>
+    -->
+
+    <h2>Is there any development going on?</h2>
+    <p>
+        We are currently working on new features and bug fixes (2016).
+    </p>
+
+    <p>
+        In case of any questions or recommendations please contact us: <a href="mailto:palindrome@ibp.cz">palindrome@ibp.cz</a>.
+    </p>
+
+    <h2>Can I download this app?</h2>
+    <p>
+        Yes, you can! You can use your own copy of this software (read enclosed licence).
+        The link for download is in <a ng-href="{{buildLink('help-about')}}">About</a> section.
+    </p>
+
+    <h2>How to cite?</h2>
+    <p>
+        Brazda, V., Kolomaznik, J., Lysek, J., Haronikova, L., Coufal, J. and Stastny, J. (2016)
+        Palindrome analyser - A new web-based server for predicting and evaluating inverted repeats in nucleotide sequences.
+        Biochem Bioph Res Co, 478, 1739-1745.
+    </p>
+
+</div>

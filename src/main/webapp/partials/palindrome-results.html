@@ -1,0 +1,109 @@
+<div ng-show="info">
+
+    <h2>{{'PALINDROME_HEATMAT'|translate}}</h2>
+
+    <p>
+        <span ng-show="segment">
+            {{'HIGHLIGHT'|translate}}: {{segment.start + 1}} - {{segment.end + 1}},
+        </span>
+        <span ng-show="segmentSize">{{segmentSize}} {{'BASE_PAIRS'|translate}} {{'PER_SEGMENT'|translate}}</span>
+    </p>
+
+    <div data-heat-map="info" data-segment-count="segmentCount" data-segment-selected="applyFilter(segment)"
+         data-segment="segment" data-highlight="heatmapHighlight" data-segment-size="segmentSize"></div>
+
+    <div ng-show="currentGenome" data-chromosome-browser="{{currentGenome.id}}" data-browser-pos="browserPos" data-palindromes="info.palindromes" data-chromosome-length="{{chromosomeLength}}"></div>
+
+    <ul class="nav nav-tabs">
+        <li ng-class="{active: uiOverview}">
+            <a ng-click="uiOverview = true; uiSimilarity = false;">{{'PALINDROME_OVERVIEW'|translate}}</a>
+        </li>
+        <li ng-class="{active: uiSimilarity}">
+            <a ng-click="uiOverview = false; uiSimilarity = true;">{{'PALINDROME_ANALYSIS'|translate}}</a>
+        </li>
+    </ul>
+
+    <div ng-show="uiOverview" ng-include="'partials/palindrome-overview.html'"></div>
+
+    <div ng-show="uiSimilarity" ng-include="'partials/palindrome-similarity.html'"></div>
+
+    <h2>{{'PALINDROME_SUMMARY'|translate}}</h2>
+
+    <table class="table table-striped">
+        <tr>
+            <th>{{'PALINDROME_SIZE'|translate}}</th>
+            <th>{{'PALINDROME_COUNT'|translate}}</th>
+            <th>{{'PALINDROME_ENERGY'|translate}}</th>
+            <th ng-show="duration">{{'REQUEST_DURATION'|translate}}</th>
+        </tr>
+        <tr>
+            <td>{{info.size}} {{'BASE_PAIRS'|translate}}</td>
+            <td>{{palindromes.length}}</td>
+            <td>
+                min: {{stats.minStability|number:2}}
+                <br />
+                max: {{stats.maxStability|number:2}}
+            </td>
+            <td ng-show="duration">{{duration}}s</td>
+        </tr>
+    </table>
+
+    <table class="table table-striped">
+        <tr>
+            <th>{{'PALINDROME_BY_LENGTH'|translate}}</th>
+            <th>{{'PALINDROME_BY_SPACER'|translate}}</th>
+            <th>{{'PALINDROME_BY_MISMATCHES'|translate}}</th>
+        </tr>
+        <tr>
+            <td>
+                <table class="table table-bordered">
+                    <tr ng-repeat="(k, v) in stats.sizeCount">
+                        <td>
+                            <a ng-click="$parent.filter.size = k">{{k}}</a>
+                            <a ng-show="$parent.filter.size == k" ng-click="$parent.filter.size = null">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                        <td class="graph-bar-container">
+                            {{v}}&times;
+                            <span class="graph-bar graph-bar-red" ng-style="{width: (v / palindromes.length * 100) + '%'}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table class="table table-bordered">
+                    <tr ng-repeat="(k, v) in stats.spacerCount">
+                        <td>
+                            <a ng-click="$parent.filter.spacer = k">{{k}}</a>
+                            <a ng-show="$parent.filter.spacer == k" ng-click="$parent.filter.spacer = null">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                        <td class="graph-bar-container">
+                            {{v}}&times;
+                            <span class="graph-bar graph-bar-red" ng-style="{width: (v / palindromes.length * 100) + '%'}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table class="table table-bordered">
+                    <tr ng-repeat="(k, v) in stats.mismatchCount">
+                        <td>
+                            <a ng-click="$parent.filter.mismatch = k">{{k}}</a>
+                            <a ng-show="$parent.filter.mismatch == k" ng-click="$parent.filter.mismatch = null">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                        <td class="graph-bar-container">
+                            {{v}}&times;
+                            <span class="graph-bar graph-bar-red" ng-style="{width: (v / palindromes.length * 100) + '%'}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</div>

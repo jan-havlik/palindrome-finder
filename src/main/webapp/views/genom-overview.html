@@ -1,0 +1,64 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_GENOMS_OVERVIEW'|translate}}</h1>
+
+    <div ng-show="genoms.length > 0">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <span data-order-direction="uiOrderSequences" data-column="name"></span>
+                    <a ng-click="toggleOrder('name', 'uiOrderSequences')">{{'TITLE'|translate}}</a>
+                </th>
+                <th class="text-center">
+                    <span data-order-direction="uiOrderSequences" data-column="length"></span>
+                    <a ng-click="toggleOrder('length', 'uiOrderSequences')">{{'LENGTH'|translate}}</a>
+                </th>
+                <th class="text-center">
+                    <span data-order-direction="uiOrderSequences" data-column="date"></span>
+                    <a ng-click="toggleOrder('date', 'uiOrderSequences')">{{'UPLOADED'|translate}}</a>
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr ng-repeat="gen in genoms | orderBy: uiOrderSequences">
+                <td>
+                    <label>
+                        <input type="checkbox" ng-model="gen.selected" />
+                        {{gen.name}}
+                    </label>
+                </td>
+                <td class="text-right">{{gen.length}} {{'BASE_PAIRS'|translate}}</td>
+                <td class="text-right">{{gen.date|localeDateTime}}</td>
+                <td>
+                    <a class="btn btn-default" ng-href="{{buildLink('palindrome', gen.id)}}">
+                        <span class="glyphicon glyphicon-search"></span> {{'PAGE_PALINDROME'|translate}}
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="clearfix">
+            <button class="btn btn-default" ng-click="toggleSelection()">
+                <span class="glyphicon glyphicon-refresh"></span> {{'TOGGLE_SEL'|translate}}
+            </button>
+
+            <button class="btn btn-danger pull-right" ng-click="deleteGenomesConfirm()">
+                <span class="glyphicon glyphicon-remove"></span> {{'DELETE'|translate}}
+            </button>
+        </div>
+    </div>
+
+    <div ng-show="genoms.length == 0">
+        {{'NOTHING_HERE'|translate}} {{'GEN_OVERVIEW_MAKE'|translate}}
+    </div>
+
+    <hr />
+
+    <a class="btn btn-default" ng-href="{{buildLink('import')}}">
+        <span class="glyphicon glyphicon-upload"></span> {{'PAGE_IMPORT'|translate}}
+    </a>
+
+    <div data-modal-confirm="confirmDeletion" data-on-confirm="deleteGenomes()" data-message="{{'CONFIRM_DELETE_SEL'|translate}}" data-title="{{'CONFIRM'|translate}}"></div>
+
+    <!-- TODO tady by mohl byt formular pro nastaveni davkove analyzy pro zaskrtnute genomy -->
+
+</div>

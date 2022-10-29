@@ -1,0 +1,63 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_PALINDROME'|translate}}</h1>
+
+    <p>
+        Palindrome analyser is a web-based software that generates information about the presence of inverted repeats in any DNA sequences.
+        Inverted repeats are DNA sequences capable of forming cruciform structures that have an important role in the regulation of natural
+        processes involving DNA. Cruciforms are fundamentally critical for a wide range of biological processes, including replication and
+        regulation of gene expression, as well as nucleosome structure and recombination. They have also been implicated in the evolution
+        and development of diseases. Palindrome analyser is a user-friendly application that provides many options for analysing inverted
+        repeats in various DNA sequences including oligonucleotides, plasmids and genomes. It allows users to search and retrieve desired
+        gene/nucleotide sequence entries from the NCBI databases, and provide data on length, sequence, locations and energy required for
+        palindrome formation. Moreover, it features an interactive graphical data representation of the distribution of the inverted repeats,
+        with options for sorting the length of palindrome, length of loop, and number of mismatches. This open access web-based software is
+        an invaluable tool for searching and analysing inverted repeats in DNA sequences.
+    </p>
+
+    <h2>Usage - preparation</h2>
+    <p>
+        Select input - text/NCBI ID/uploaded sequence. Adjust parameters of analysis. In range inputs any number, range (m-n)
+        or individual numbers (a,b,c) can be inserted. When you are satisfied with parameters you can press Analyse button and
+        wait a while (or longer depending on the length of sequence) for results. If you ticked the "Store results" checkbox
+        you can find the results in Analysis overview module and view the results later.
+        The checkbox labelled circular modifies the treatment of sequence during analysis such that the sequence is analysed
+        as infinite (or cicluar) sequence.
+    </p>
+
+    <h2>Usage - analysis results</h2>
+    <p>
+        The results section is divided in two views - overview and similarity analysis. Common part is heatmap and sequence
+        browser. The heatmap divides sequence into given amount of segments where each segment shows amount of palindromes in
+        that particular segment. By clicking on the heatmap segment the browser moves on the beginning of clicked segment,
+        the segment is highlighted with green border and palindromes in overview which do not belong into selected segment
+        are hidden. The browser shows various amount of base pairs depending on Internet browser window width. In the bottom
+        part of page we can find summary of sequence analysis with histograms.
+    </p>
+    <h3>Overview of palindromes</h3>
+    <p>
+        This part can be used to browse and filter individual palindromes. You can filter found sequences by length, spacer
+        length and mismatch count. There is also a filter which searches particular sequences.
+        By clicking the magnifier icon of palindrome, the sequence browser moves to given position. This is useful to analyse
+        surrounding base pairs of palindrome. The details button shows graphical representation of loop with positions.
+        All filters can be removed by clicking cancel filter button.
+    </p>
+    <h3>Analysis of similarity</h3>
+    <p>
+        This view is useful to group palindromes by the beginning of the sequence, the inverted part or even by spacer.
+        You can filter out grouped sequences by amount of their occurrences in analysed sequence. Highlight location button
+        will mark the heatmap segments where grouped palindromes are located (yellow border). The highlight of palindrome
+        location can be removed from heatmap by clicking cancel highlight button.
+    </p>
+    <h2>Storing results and sequences</h2>
+    <p>
+        Only registered users can store results and upload/import sequences.
+    </p>
+
+    <p>
+        <a ng-href="{{buildLink('palindrome')}}">
+            <span class="glyphicon glyphicon-arrow-left"></span> {{'PAGE_PALINDROME'|translate}}
+        </a>
+    </p>
+
+</div>

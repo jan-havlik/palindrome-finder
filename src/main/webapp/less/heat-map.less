@@ -1,0 +1,34 @@
+.heat-map {
+  display: flex;
+  background-color: #5e5e5e;
+
+  .heat-map-segment-first {
+    width: 1rem;
+    text-align: center;
+  }
+  .heat-map-segment {
+    display: inline-block;
+    flex-grow: 1;
+    padding: 0.2rem 0 0.2rem 0rem;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    font-size: 0.6rem;
+    color: #FFFFFF;
+    cursor: pointer;
+
+    &.highlight {
+      border-top: 2px solid #ffff00;
+      border-bottom: 2px solid #ffff00;
+      border-left: 1px solid #ffff00;
+      border-right: 1px solid #ffff00;
+    }
+    &.active {
+      border-top: 2px solid #00FF00;
+      border-bottom: 2px solid #00FF00;
+      border-left: 1px solid #00FF00;
+      border-right: 1px solid #00FF00;
+    }
+  }
+}

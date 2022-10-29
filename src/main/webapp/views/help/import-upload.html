@@ -1,0 +1,29 @@
+<div class="container app-content" role="main">
+
+    <h1>{{'PAGE_IMPORT_UPLOAD'|translate}}</h1>
+
+    <h2>Usage of upload</h2>
+    <p>
+        We support currently only 2 types of data inputs - plain text files with A, C, G and T characters encoding the sequence and
+        Fasta format.
+        <br />
+        When uploading a file, select a name for your sequence. Then select data type (plain or fasta). Choose a file from your hard
+        drive and press Upload button. After a while the file should be available in overview of uploaded/imported sequences - My sequences.
+    </p>
+
+    <h2>Usage of NCBI</h2>
+    <p>
+        Simply type a NCBI ID (e.g. NC_001770) and press import button. After a while the file should be available in overview of uploaded/imported sequences - My sequences.
+    </p>
+
+    <p class="alert alert-warning">
+        Only registered users can upload/import sequences.
+    </p>
+
+    <p>
+        <a ng-href="{{buildLink('import')}}">
+            <span class="glyphicon glyphicon-arrow-left"></span> {{'PAGE_IMPORT'|translate}}
+        </a>
+    </p>
+
+</div>

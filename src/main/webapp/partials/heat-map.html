@@ -1,0 +1,12 @@
+<div class="heat-map">
+    <span class="heat-map-segment heat-map-segment-first" ng-click="clearFilter()">
+        <span ng-show="current || (highlight && highlight.length > 0)" class="glyphicon glyphicon-remove"></span>
+    </span>
+    <span class="heat-map-segment" ng-repeat="seg in segments"
+          ng-style="{'background-color': 'rgb(' + seg.color + ' ,0 ,0)'}"
+          ng-class="{active: current == seg, highlight: isHighlight(seg)}"
+          ng-click="segmentClicked(seg)"
+          title="{{seg.start}} - {{seg.end - 1}}">
+        {{seg.count}}
+    </span>
+</div>

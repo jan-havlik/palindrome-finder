@@ -1,0 +1,149 @@
+<div class="container-fluid app-content" role="main">
+
+    <h1>
+        {{'PAGE_PALINDROME'|translate}} {{currentGenome.name}}
+        <a class="pull-right" href="{{buildLink('help-palindrome')}}">
+            <span class="glyphicon glyphicon-question-sign"></span>
+        </a>
+    </h1>
+
+    <div id="alert"></div>
+
+    <form class="clearfix" name="palindromeForm" ng-submit="analyzePalindrome(palindromeForm)">
+
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row" ng-show="user">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>{{'SEQUENCE'|translate}}: </label>
+
+                            <select class="form-control" ng-model="genome">
+                                <option value="text">{{'PALINDROME_AS_TEXT'|translate}}</option>
+                                <option value="ncbi">{{'PALINDROME_AS_NCBI'|translate}}</option>
+                                <optgroup ng-show="genoms.length > 0" label="{{'PALINDROME_UPLOADED'|translate}}">
+                                    <option ng-repeat="g in genoms" value="{{g.id}}"
+                                            ng-selected="currentGenome.id == g.id">{{g.name|scut:50}} ({{g.length}} {{'BASE_PAIRS'|translate}})
+                                    </option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <fieldset class="col-sm-4">
+                        <div class="form-group">
+                            <label>{{'SIZE'|translate}}: </label>
+
+                            <div class="input-group">
+                                <input type="text" name="size" value="" class="form-control" size="4" ng-model="size"
+                                       required="required" data-palindrome-size="mismatches" data-range />
+                                <span class="input-group-addon">{{'RANGE'|translate}}</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-4">
+                        <div class="form-group">
+                            <label>{{'SPACER'|translate}}: </label>
+
+                            <div class="input-group">
+                                <input type="text" name="spacer" value="" class="form-control" size="4" ng-model="spacer"
+                                       required="required"/>
+                                <span class="input-group-addon">{{'RANGE'|translate}}</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-4">
+                        <div class="form-group">
+                            <label>{{'PALINDROME_MISMATCHES'|translate}}: </label>
+
+                            <div class="input-group">
+                                <input type="text" name="mismatches" value="" class="form-control" size="4" ng-model="mismatches"
+                                       required="required" data-range />
+                                <span class="input-group-addon">{{'RANGE'|translate}}</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="col-sm-2">
+
+                <label>{{'OPTIONS'|translate}}: </label>
+
+                <br />
+
+                <label class="checkbox-inline">
+                    <input type="checkbox" ng-model="cycle" />
+                    {{'PALINDROME_CYCLYC'|translate}}
+                </label>
+
+                <br />
+
+                <label class="checkbox-inline">
+                    <input type="checkbox" ng-model="dinucleotide" />
+                    {{'PALINDROME_DINUCLEOTIDE'|translate}}
+                </label>
+
+                <br />
+
+                <label class="checkbox-inline" ng-show="user && genome != 'text'">
+                    <input type="checkbox" ng-model="storeResult" />
+                    {{'PALINDROME_STORE_RESULT'|translate}}
+                </label>
+
+            </div>
+        </div>
+
+        <div class="row" ng-show="genome == 'ncbi'">
+            <fieldset class="col-sm-12">
+                <div cols="80" rows="10">
+                    <input class="form-control" type="text" ng-model="ncbiId" placeholder="{{'NCBI_ID'|translate}}">
+                    <br />
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row" ng-show="genome == 'text'">
+            <fieldset class="col-sm-12">
+                <div cols="80" rows="10">
+                    <textarea class="form-control" ng-model="rawChromosome" placeholder="{{'SEQUENCE'|translate}}"></textarea>
+                    <br />
+                </div>
+            </fieldset>
+        </div>
+
+        <div ng-messages="palindromeForm.$error" ng-show="palindromeForm.$dirty">
+            <p ng-message="required" class="alert alert-warning">{{'ERR_FILL_ALL'|translate}}</p>
+            <p ng-message="palindromeSize" class="alert alert-warning">{{'ERR_PALINDROME_MISMATCH_SIZE'|translate}}</p>
+            <p ng-message="range" class="alert alert-warning">{{'ERR_RANGE'|translate}}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <input ng-disabled="!palindromeForm.$valid || palindromeForm.submitting" type="submit"
+                       class="btn btn-success" value="{{'ANALYSE'|translate}}"/>
+            </div>
+        </div>
+
+    </form>
+
+    <br ng-show="palindromeForm.errors && palindromeForm.errors.length > 0"/>
+
+    <p class="alert alert-danger" ng-repeat="error in palindromeForm.errors">
+        {{error}}
+    </p>
+
+    <hr/>
+
+    <h2 ng-show="palindromeForm.submitting">
+        {{'PROCESSING'|translate}}
+        <span class="processing"></span>
+    </h2>
+
+    <div ng-include="'partials/palindrome-results.html'"></div>
+
+</div>

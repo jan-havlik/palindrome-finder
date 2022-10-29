@@ -1,0 +1,67 @@
+<h2>{{'PALINDROME_ANALYSIS'|translate}}</h2>
+
+<p>
+    {{'PALINDROME_ANALYSIS_INFO'|translate}}
+</p>
+
+<div class="form-inline">
+    <label title="{{'PALINDROME_GROUP_SEQUENCE_INFO'|translate}}">
+        <input type="checkbox" ng-model="uiMatchRepSequence" ng-required="!uiMatchRepSpacer && !uiMatchRepOpposite" />
+        {{'PALINDROME_GROUP_SEQUENCE'|translate}}
+    </label>
+    <label title="{{'PALINDROME_GROUP_SPACER_INFO'|translate}}">
+        <input type="checkbox" ng-model="uiMatchRepSpacer" ng-required="!uiMatchRepOpposite && !uiMatchRepSequence" />
+        {{'PALINDROME_GROUP_SPACER'|translate}}
+    </label>
+    <label title="{{'PALINDROME_GROUP_OPPOSITE_INFO'|translate}}">
+        <input type="checkbox" ng-model="uiMatchRepOpposite" ng-required="!uiMatchRepSpacer && !uiMatchRepSequence" />
+        {{'PALINDROME_GROUP_OPPOSITE'|translate}}
+    </label>
+    <button class="btn btn-default" ng-click="refreshRepetitions(palindromes, uiMatchRepSequence, uiMatchRepSpacer, uiMatchRepOpposite)" ng-disabled="!uiMatchRepOpposite && !uiMatchRepSequence && !uiMatchRepSpacer">
+        <span class="glyphicon glyphicon-refresh"></span> {{'REFRESH'|translate}}
+    </button>
+</div>
+<br />
+<div class="form-inline">
+    <label>{{'PALINDROME_MIN_AMOUNT'|translate}}:</label>
+    <input class="form-control" type="number" min="1" ng-model="minRepeat" />
+    <button ng-show="heatmapHighlight.length" class="btn btn-default" ng-click="highlightPalindromes([])">
+        <span class="glyphicon glyphicon-remove"></span> {{'PALINDROME_CANCEL_HIGHLIGHT'|translate}}
+    </button>
+</div>
+<br />
+<br />
+
+<table class="table table-bordered">
+    <tr>
+        <th>{{'PALINDROME'|translate}}</th>
+        <th>
+            <span data-order-direction="uiOrderSimilar" data-column="sequence.length"></span>
+            <a ng-click="toggleOrder('sequence.length', 'uiOrderSimilar')">{{'LENGTH'|translate}}</a>
+        </th>
+        <th>
+            <span data-order-direction="uiOrderSimilar" data-column="count"></span>
+            <a ng-click="toggleOrder('count', 'uiOrderSimilar')">{{'PALINDROME_AMOUNT'|translate}}</a>
+        </th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr ng-repeat="palindrome in repetitions | orderBy: uiOrderSimilar"
+        ng-class="{highlight: isSequenceFilter(palindrome.sequence)}"
+        ng-show="palindrome.count >= minRepeat">
+        <td class="sequence">
+            <a ng-click="filterSequence(palindrome.sequence)">
+                <span class="glyphicon glyphicon-filter" title="{{'PALINDROME_FILTER'|translate}}"></span>
+                <span class="palindrome-sequence" ng-show="uiShowRepSequence">{{palindrome.sequence}}</span>
+                <span class="palindrome-spacer" ng-show="uiShowRepSpacer">{{palindrome.spacer}}</span>
+                <span class="palindrome-opposite" ng-show="uiShowRepOpposite">{{palindrome.opposite}}</span>
+            </a>
+        </td>
+        <td>{{palindrome.sequence.length}}</td>
+        <td>{{palindrome.count}}&times;</td>
+        <td>
+            <button class="btn btn-default" ng-click="highlightPalindromes(palindrome.pos)">
+                <span class="glyphicon glyphicon-search"></span> {{'PALINDROME_HIGHLIGHT_LOCATION'|translate}}
+            </button>
+        </td>
+    </tr>
+</table>

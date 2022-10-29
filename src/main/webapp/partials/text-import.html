@@ -1,0 +1,39 @@
+<div ng-controller="TextImportCtrl">
+    <h2>{{'PAGE_TEXT_IMPORT'|translate}}</h2>
+
+    <p class="alert alert-success clearfix" ng-show="textImportForm.success">
+        {{'TEXT_IMPORT_DONE'|translate}}
+    </p>
+
+    <p class="alert alert-danger" ng-repeat="error in textImportForm.errors">
+        {{error}}
+    </p>
+
+    <p class="alert alert-warning" ng-show="textImportForm.submitting">
+        {{'PROCESSING'|translate}}
+        <span class="processing"></span>
+    </p>
+
+    <form novalidate name="textImportForm" ng-submit="upload(textImportForm)">
+
+        <fieldset ng-disabled="textImportForm.submitting">
+
+            <label>{{'TITLE'|translate}}:</label>
+            <input class="form-control" type="text" ng-model="name" required />
+            <br />
+
+            <label>Text:</label>
+            <textarea class="form-control" rows="6" ng-model="sequence" required></textarea>
+            <br />
+
+            <div ng-messages="textImportForm.$error" ng-show="textImportForm.$dirty">
+                <p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+            </div>
+
+            <input type="submit" ng-disabled="!textImportForm.$valid" class="btn btn-success" value="{{'UPLOAD'|translate}}" />
+
+        </fieldset>
+
+    </form>
+
+</div>

@@ -1,0 +1,87 @@
+@import "heat-map";
+@import "chromosome-browser";
+
+html {
+  font-size: 12pt;
+}
+
+body {
+  background-color: #FFFFFF;
+}
+
+a {
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.app-content {
+  margin-top: 50px;
+}
+
+.highlight {
+  background-color: #F8F58C;
+}
+
+.sequence {
+  font-family: "Consolas", "Courier New", Courier, monospace;
+  font-weight: bold;
+  .palindrome-sequence {
+    color: #FF0000;
+  }
+  .palindrome-opposite {
+    color: #0000FF;
+  }
+  .palindrome-spacer {
+    color: #000000;
+  }
+}
+
+.graph-bar-container {
+  position: relative;
+
+  .graph-bar {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    bottom: 2px;
+    border: 1px solid red;
+    opacity: 0.2;
+
+    &.graph-bar-red {
+      background-color: #FF0000;
+    }
+    &.graph-bar-green {
+      background-color: #00FF00;
+    }
+    &.graph-bar-blue {
+      background-color: #0000FF;
+    }
+  }
+}
+
+.heat-map, .chromosome-browser {
+  margin-bottom: 1rem;
+}
+
+.processing {
+  background-image: url('../images/loader.gif');
+  background-repeat: no-repeat;
+  background-position: right;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+
+input, select, textarea {
+
+  &.ng-valid[required] {
+    border-left: 5px solid #42A948; /* green */
+  }
+
+  &.ng-invalid {
+    border-left: 5px solid #a94442; /* red */
+  }
+
+}

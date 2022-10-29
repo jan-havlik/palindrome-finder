@@ -1,0 +1,41 @@
+<div class="container app-content" role="main">
+
+    <div class="col-md-6">
+
+        <h1>{{'RESET_PASS'|translate}}</h1>
+
+        <p class="alert alert-success clearfix" ng-show="resetPassForm.success">
+            {{'RESET_PASS_DONE'|translate}}
+            <a ng-href="{{buildLink('login')}}" class="btn btn-default pull-right">{{'LOGIN'|translate}}</a>
+        </p>
+
+        <p class="alert alert-danger" ng-repeat="error in resetPassForm.errors">
+            {{error}}
+        </p>
+
+        <p class="alert alert-warning" ng-show="user">
+            {{'ALREADY_LOGGED_IN'|translate}}
+        </p>
+
+        <form name="resetPassForm" novalidate ng-submit="resetPass(resetPassForm)" ng-hide="user">
+
+            <fieldset ng-disabled="resetPassForm.submitting">
+
+                <label>{{'EMAIL'|translate}}:</label>
+                <input class="form-control" type="email" ng-model="email" required="required" />
+                <br />
+
+                <div ng-messages="resetPassForm.$error" ng-show="resetPassForm.$dirty">
+                    <p class="alert alert-warning" ng-message="required">{{'ERR_FILL_ALL'|translate}}</p>
+                    <p class="alert alert-warning" ng-message="email">{{'ERR_EMAIL'|translate}}</p>
+                </div>
+
+                <input type="submit" ng-disabled="!resetPassForm.$valid" value="{{'RESET_PASS'|translate}}" class="btn btn-success" />
+
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>
