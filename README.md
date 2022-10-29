@@ -51,6 +51,9 @@ Structure of CSV files (it is actually TSV file):
 More info for command line usage is in program's help.
 
 ----
+# Version 2.8.1
+1. Support NCBI id without underscore in CSV files
+
 # Version 2.8.0
 1. Added command line options for IR spacer (min, max), mismatch (accepted as string with a dash e.g. "0,1") and dinucleotide filter (filter ATATAT) to reflect web server possibilities. 
 
