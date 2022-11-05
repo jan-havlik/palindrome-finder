@@ -45,11 +45,13 @@ public class NCBIDownloader {
 
         Map<String, String> ret = new HashMap<String, String>();
         for (String[] row : rows) {
-            Pattern p = Pattern.compile("[A-Z]{2}_?[A-Z0-9]+(\\.[0-9]+){0,1}");
-            if (p.matcher(row[0]).matches()) {
-                ret.put(row[0], row[0]);
+            Pattern p = Pattern.compile("[A-Z]{1,2}_?[A-Z0-9]+(\\.[0-9]+){0,1}");
+            if (p.matcher(row[1]).matches()) {
+                ret.put(row[1], row[0]);
+            } else if (p.matcher(row[0]).matches()) {
+                ret.put(row[0], row[0]); // in case NCBI ID is the first column
             } else {
-                LOG.info("Not matched ID '{}'", row[0]);
+                LOG.info("Not matched ID '{}' for {}", row[1], row[0]);
             }
         }
         return ret;

@@ -51,6 +51,9 @@ Structure of CSV files (it is actually TSV file):
 More info for command line usage is in program's help.
 
 ----
+# Version 2.8.2
+1. Fix NCBI column position
+
 # Version 2.8.1
 1. Support NCBI id without underscore in CSV files
 
